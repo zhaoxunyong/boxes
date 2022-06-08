@@ -1,0 +1,7 @@
+*.log
+*.box
+*.tar
+*.gz
+*.deb
+*.vbox-extpack
+.vagrant/
