@@ -1,0 +1,17 @@
+#Version: 1.0.0
+
+FROM ubuntu:20.04
+
+ENV WORK_SHELL /data/shell
+WORKDIR $WORK_SHELL
+
+#ADD ./sources.list /etc/apt/sources.list
+#RUN apt update && apt install -y init
+
+ADD ./script.sh $WORK_SHELL/
+RUN $WORK_SHELL/script.sh
+
+#CMD ["bash", "-c" ,"$WORK_SHELL/init.sh"]
+
+
+
