@@ -37,6 +37,9 @@ PrivateTmp=true
 User=mysql
 Group=mysql
 WorkingDirectory=/Developer/mysql-5.7.37
+
+[Install]
+WantedBy=multi-user.target
 EOF
 
 tar zxf mysql-5.7.37-linux-glibc2.12-x86_64.tar.gz
