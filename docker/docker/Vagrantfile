@@ -7,11 +7,11 @@
 # you're doing.
 Vagrant.configure("2") do |config|
 
-  config.vm.network :public_network, ip: "192.168.101.84", netmask: "255.255.255.0", bridge: "enp2s0", docker_network__gateway: "192.168.101.254"
+  config.vm.network :public_network, ip: "192.168.101.85", netmask: "255.255.255.0", bridge: "enp2s0", docker_network__gateway: "192.168.101.254"
   config.vm.provider "docker" do |d|
     d.image = "dave/docker"
     #d.build_dir = "."
-    d.create_args = ["--hostname=config", "-v", "/data/var-lib-docker:/var/lib/docker"]
+    d.create_args = ["--hostname=docker", "-v", "/data/var-lib-docker:/var/lib/docker"]
     d.privileged = true
     d.cmd = ["/sbin/init"]
   end
