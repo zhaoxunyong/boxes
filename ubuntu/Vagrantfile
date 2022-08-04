@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
     node1.vm.box = "ubuntu20.04"
     node1.vm.hostname = "node1"
     node1.vm.network "public_network", ip: "192.168.101.83", netmask: "255.255.255.0", gateway: "192.168.101.254", bridge: "enp2s0"
-    node1.vm.synced_folder "/data/fabric", "/data/fabric"
+    #node1.vm.synced_folder "/data/fabric", "/data/fabric"
     node1.vm.provider "virtualbox" do |vb|
       #vb.gui = true
       vb.cpus = 4 
@@ -47,25 +47,25 @@ Vagrant.configure("2") do |config|
   end
 
 
-  config.vm.define :node2 do |node2|
-    node2.vm.box = "ubuntu20.04"
-    node2.vm.hostname = "node2"
-    node2.vm.network "public_network", ip: "192.168.101.84", netmask: "255.255.255.0", gateway: "192.168.101.254", bridge: "enp2s0"
-    node2.vm.synced_folder "/data/fabric", "/data/fabric"
-    node2.vm.provider "virtualbox" do |vb|
-      #vb.gui = true
-      vb.cpus = 4
-      vb.memory = "4096"
-    end
-    node2.vm.provision "shell", run: "always", inline: <<-SHELL
-      #cp -a /vagrant/sources.list /etc/apt/sources.list
-      #apt-get install sudo net-tools -y
-      #sudo route del default gw 10.0.2.2
-    SHELL
-    node2.vm.provision "shell" do |s|
-      s.path = "script.sh"
-      #s.args = ["--bip=10.1.20.1/24"]
-    end
-  end
+  #config.vm.define :node2 do |node2|
+  #  node2.vm.box = "ubuntu20.04"
+  #  node2.vm.hostname = "node2"
+  #  node2.vm.network "public_network", ip: "192.168.101.84", netmask: "255.255.255.0", gateway: "192.168.101.254", bridge: "enp2s0"
+  #  node2.vm.synced_folder "/data/fabric", "/data/fabric"
+  #  node2.vm.provider "virtualbox" do |vb|
+  #    #vb.gui = true
+  #    vb.cpus = 4
+  #    vb.memory = "4096"
+  #  end
+  #  node2.vm.provision "shell", run: "always", inline: <<-SHELL
+  #    #cp -a /vagrant/sources.list /etc/apt/sources.list
+  #    #apt-get install sudo net-tools -y
+  #    #sudo route del default gw 10.0.2.2
+  #  SHELL
+  #  node2.vm.provision "shell" do |s|
+  #    s.path = "script.sh"
+  #    #s.args = ["--bip=10.1.20.1/24"]
+  #  end
+  #end
 
 end
