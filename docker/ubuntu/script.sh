@@ -39,6 +39,8 @@ timedatectl set-timezone Asia/Shanghai
 cat /etc/security/limits.conf|grep "nofile             100000" > /dev/null
 if [[ $? != 0 ]]; then
 		cat >> /etc/security/limits.conf  << EOF
+root            -    nofile             100000
+root            -    nproc              100000
 *               -    nofile             100000
 *               -    nproc              100000
 EOF
@@ -57,7 +59,9 @@ fi
 cat /etc/systemd/user.conf|egrep '^DefaultLimitNOFILE' > /dev/null
 if [[ $? != 0 ]]; then
 		cat >> /etc/systemd/system.conf << EOF
+DefaultLimitCORE=infinity
 DefaultLimitNOFILE=100000
+DefaultLimitNPROC=100000
 EOF
 fi
 
