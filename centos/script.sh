@@ -28,23 +28,28 @@ systemctl stop firewalld
 timedatectl set-timezone Asia/Shanghai
 
 #logined limit
-cat /etc/security/limits.conf|grep 100000 > /dev/null
+cat /etc/security/limits.conf|grep "nofile             100000" > /dev/null
 if [[ $? != 0 ]]; then
-cat >> /etc/security/limits.conf  << EOF
+		cat >> /etc/security/limits.conf  << EOF
 *               -    nofile             100000
 *               -    nproc              100000
 EOF
 fi
 
-sed -i 's;4096;100000;g' /etc/security/limits.d/20-nproc.conf
-
 #systemd service limit
-cat /etc/systemd/system.conf|egrep '^DefaultLimitCORE' > /dev/null
+cat /etc/systemd/system.conf|egrep '^DefaultLimitNOFILE' > /dev/null
 if [[ $? != 0 ]]; then
-cat >> /etc/systemd/system.conf << EOF
+		cat >> /etc/systemd/system.conf << EOF
 DefaultLimitCORE=infinity
 DefaultLimitNOFILE=100000
 DefaultLimitNPROC=100000
+EOF
+fi
+#user service limit
+cat /etc/systemd/user.conf|egrep '^DefaultLimitNOFILE' > /dev/null
+if [[ $? != 0 ]]; then
+		cat >> /etc/systemd/system.conf << EOF
+DefaultLimitNOFILE=100000
 EOF
 fi
 
