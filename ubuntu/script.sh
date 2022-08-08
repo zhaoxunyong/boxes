@@ -36,7 +36,7 @@ systemctl stop firewalld
 timedatectl set-timezone Asia/Shanghai
 
 #logined limit
-cat /etc/security/limits.conf|grep "nofile             100000" > /dev/null
+cat /etc/security/limits.conf|grep "^root" > /dev/null
 if [[ $? != 0 ]]; then
 		cat >> /etc/security/limits.conf  << EOF
 root            -    nofile             100000
