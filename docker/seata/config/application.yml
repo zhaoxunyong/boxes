@@ -52,7 +52,7 @@ seata:
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://192.168.101.82:3306/seata-server?rewriteBatchedStatements=true
       user: root
-      password: Aa123#@!
+      password: Aa1234$#@!
       min-conn: 5
       max-conn: 100
       global-table: global_table
