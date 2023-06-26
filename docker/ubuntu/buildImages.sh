@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t "dave/ubuntu:20.04" . -f Dockerfile.ubuntu
+DOCKER_BUILDKIT=0 docker build -t "registry.zerofinance.net/library/ubuntu:23.04" . -f Dockerfile.ubuntu

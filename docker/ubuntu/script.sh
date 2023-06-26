@@ -7,21 +7,21 @@ echo "scripting......"
 cp /etc/apt/sources.list /etc/apt/sources.list.bak
 # cat >> /etc/apt/sources.list.d/aliyun.list << EOF
 tee /etc/apt/sources.list << EOF
-#For ubuntu 20.04
-deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ lunar main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ lunar main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ lunar-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ lunar-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ lunar-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ lunar-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ lunar-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ lunar-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ lunar-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ lunar-backports main restricted universe multiverse
 EOF
 
 apt-get update
-apt-get install make g++ init inetutils-ping sudo jq net-tools wget htop vim screen curl lsof lrzsz zip unzip expect openssh-server -y
+#apt-get install make g++ init inetutils-ping sudo jq net-tools wget htop vim screen curl lsof lrzsz zip unzip expect openssh-server -y
+apt-get install init inetutils-ping sudo jq net-tools wget htop vim screen curl lsof lrzsz zip unzip expect openssh-server -y
 
 #LANG="en_US.UTF-8"
 #sed -i 's;LANG=.*;LANG="zh_CN.UTF-8";' /etc/locale.conf

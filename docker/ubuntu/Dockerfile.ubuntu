@@ -1,6 +1,6 @@
 #Version: 1.0.0
 
-FROM ubuntu:20.04
+FROM ubuntu:23.04
 
 ENV WORK_SHELL /data/shell
 WORKDIR $WORK_SHELL

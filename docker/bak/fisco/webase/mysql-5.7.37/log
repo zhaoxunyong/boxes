@@ -1,0 +1,9 @@
+2023-06-26T07:40:25.754708Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2023-06-26T07:40:25.860073Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2023-06-26T07:40:25.877208Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2023-06-26T07:40:25.930415Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: b71032a2-13f4-11ee-871d-040e3c314c08.
+2023-06-26T07:40:25.931169Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
+2023-06-26T07:40:26.246891Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2023-06-26T07:40:26.246895Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2023-06-26T07:40:26.247136Z 0 [Warning] CA certificate ca.pem is self signed.
+2023-06-26T07:40:26.403817Z 1 [Note] A temporary password is generated for root@localhost: %l1lH;tdg<./
