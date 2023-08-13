@@ -1,0 +1,18 @@
+#version: 1.0.0
+
+FROM centos:7
+
+ENV WORK_SHELL /data/shell
+WORKDIR $WORK_SHELL
+
+ADD script.sh docker-entrypoint.sh $WORK_SHELL/
+
+RUN chmod +x $WORK_SHELL/*.sh
+
+RUN $WORK_SHELL/script.sh
+
+ENTRYPOINT ["/data/shell/docker-entrypoint.sh"]
+#CMD ["bash", "-c" ,"$WORK_SHELL/init.sh"]
+
+
+

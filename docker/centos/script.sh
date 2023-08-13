@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash -x
 #http://www.360doc.com/content/14/1125/19/7044580_428024359.shtml
 #http://blog.csdn.net/54powerman/article/details/50684844
 #http://c.biancheng.net/cpp/view/2739.html
 echo "scripting......"
 
-yum -y install net-tools wget
+yum -y install net-tools iproute iproute-doc wget sudo
 
 sed -i 's;SELINUX=.*;SELINUX=disabled;' /etc/selinux/config
 setenforce 0
@@ -129,9 +129,9 @@ yum makecache
 #yum -y install createrepo rpm-sign rng-tools yum-utils 
 yum -y install htop bind-utils bridge-utils ntpdate setuptool iptables system-config-securitylevel-tui system-config-network-tui \
  ntsysv net-tools lrzsz telnet lsof vim dos2unix unix2dos zip unzip \
- lsof openssl openssh-server openssh-clients
-
-systemctl enable sshd
+ lsof openssl openssh-server openssh-clients expect
 
 sed -i 's;#PasswordAuthentication yes;PasswordAuthentication yes;g' /etc/ssh/sshd_config
-systemctl restart sshd
+sed -i 's;#PermitRootLogin yes;PermitRootLogin yes;g' /etc/ssh/sshd_config
+#systemctl enable sshd
+#systemctl restart sshd

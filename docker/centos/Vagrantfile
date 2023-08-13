@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+
+  config.vm.network :public_network, ip: "192.168.101.86", netmask: "255.255.255.0", bridge: "wlo1", docker_network__gateway: "192.168.101.254"
+  config.vm.provider "docker" do |d|
+    d.image = "registry.zerofinance.net/library/centos:7"
+    #d.create_args = ["--hostname=centos7", "-v", "/data/vagrant:/data/vagrant", "-v", "/var/run/docker.sock:/var/run/docker.sock"]
+    d.create_args = ["--hostname=centos7", "--cpus=4", "--cpu-shares=4000", "-m=2048m", "--memory-reservation=256m", "-v", "/data/vagrant:/data/vagrant", "-v", "/data/bigdata:/data/bigdata"]
+    d.privileged = true
+    d.cmd = ["/usr/sbin/init"]
+  end
+
+  config.vm.provision "shell", run: "always", inline: <<-SHELL
+    yum -y install net-tools > /dev/null
+    #ifconfig eth1 192.168.101.84 netmask 255.255.255.0 up
+    route add default gw 192.168.101.254
+    #sudo route del default gw 10.0.2.2
+    route del default gw 172.17.0.1 || true 
+  SHELL
+
+end

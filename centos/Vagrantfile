@@ -26,20 +26,23 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :node1 do |node1|
     node1.vm.box = "centos7"
-    node1.vm.hostname = "node1"
-    node1.vm.network "public_network", ip: "192.168.101.83", netmask: "255.255.255.0", gateway: "192.168.101.254", bridge: "enp2s0"
+    node1.vm.hostname = "node1.zerofinance.net"
+    config.disksize.size = '60GB'
+    #node1.vm.network "public_network", ip: "192.168.101.83", netmask: "255.255.255.0", gateway: "192.168.101.254", bridge: "enp2s0"
+    node1.vm.network "public_network", ip: "192.168.101.83", netmask: "255.255.255.0", bridge: "enp2s0"
     #node1.vm.synced_folder "/home/dev/vagrant", "/data/vagrant"
     node1.vm.provider "virtualbox" do |vb|
       #vb.gui = true
       vb.cpus = 4 
-      vb.memory = "4096"
+      vb.memory = "4196"
     end
     node1.vm.provision "shell", run: "always", inline: <<-SHELL
       yum -y install net-tools > /dev/null
-      #ifconfig eth1 192.168.101.83 netmask 255.255.255.0 up
-      #route add default gw 192.168.101.254
-      sudo route del default gw 10.0.2.2
+      route add default gw 192.168.101.254
     SHELL
+    node1.vm.provision "shell",
+      run: "always",
+      inline: "route del default gw 10.0.2.2"
     node1.vm.provision "shell" do |s|
       s.path = "script.sh"
       #s.args = ["--bip=10.1.10.1/24"]
@@ -50,21 +53,47 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :node2 do |node2|
     node2.vm.box = "centos7"
-    node2.vm.hostname = "node2"
+    node2.vm.hostname = "node2.zerofinance.net"
     node2.vm.network "public_network", ip: "192.168.101.84", netmask: "255.255.255.0", gateway: "192.168.101.254", bridge: "enp2s0"
     #node1.vm.synced_folder "/home/dev/vagrant", "/data/vagrant"
     node2.vm.provider "virtualbox" do |vb|
       #vb.gui = true
       vb.cpus = 4
-      vb.memory = "4096"
+      vb.memory = "4196"
     end
     node2.vm.provision "shell", run: "always", inline: <<-SHELL
       yum -y install net-tools > /dev/null
       #ifconfig eth1 192.168.101.84 netmask 255.255.255.0 up
       #route add default gw 192.168.101.254
-      sudo route del default gw 10.0.2.2
+      #sudo route del default gw 10.0.2.2
+      #ip route del default via 10.0.2.2 || true
+      route del default gw 10.0.2.2 || true
     SHELL
     node2.vm.provision "shell" do |s|
+      s.path = "script.sh"
+      #s.args = ["--bip=10.1.20.1/24"]
+    end
+  end
+
+
+  config.vm.define :node3 do |node3|
+    node3.vm.box = "centos7"
+    node3.vm.hostname = "node3.zerofinance.net"
+    #node3.vm.network "public_network", ip: "192.168.101.85", netmask: "255.255.255.0", gateway: "192.168.101.254", bridge: "enp2s0"
+    node3.vm.network "public_network", auto_config: false, bridge: "enp2s0"
+    #node1.vm.synced_folder "/home/dev/vagrant", "/data/vagrant"
+    node3.vm.provider "virtualbox" do |vb|
+      #vb.gui = true
+      vb.cpus = 4
+      vb.memory = "4196"
+    end
+    node3.vm.provision "shell", run: "always", inline: <<-SHELL
+      yum -y install net-tools > /dev/null
+      ifconfig eth1 192.168.101.85 netmask 255.255.255.0 up
+      route add default gw 192.168.101.254
+      #route del default gw 10.0.2.2
+    SHELL
+    node3.vm.provision "shell" do |s|
       s.path = "script.sh"
       #s.args = ["--bip=10.1.20.1/24"]
     end
