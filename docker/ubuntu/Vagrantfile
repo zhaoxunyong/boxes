@@ -7,13 +7,12 @@
 # you're doing.
 Vagrant.configure("2") do |config|
 
-  config.vm.network :public_network, ip: "192.168.101.83", netmask: "255.255.255.0", bridge: "wlo1", docker_network__gateway: "192.168.101.254"
+  config.vm.network :public_network, ip: "192.168.101.86", netmask: "255.255.255.0", bridge: "wlo1", docker_network__gateway: "192.168.101.254"
   config.vm.provider "docker" do |d|
     d.image = "registry.zerofinance.net/library/ubuntu:23.04"
     #d.image = "dave/fisco:3.0.0"
     #d.image = "dave/webase:3.0.0"
     #d.build_dir = "."
-    #d.create_args = ["--hostname=config", "-v", "/data/fisco:/data/fisco", "-v", "/data/vagrant/docker/fisco/shell:/data/shell"]
     d.create_args = ["--hostname=ubuntu", "-v", "/data/vagrant:/data/vagrant", "-v", "/var/run/docker.sock:/var/run/docker.sock"]
     d.privileged = true
     d.cmd = ["/sbin/init"]
